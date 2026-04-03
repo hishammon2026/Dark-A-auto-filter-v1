@@ -1,10 +1,10 @@
 import os
 
 class Config:
-    API_ID = int(os.environ.get("API_ID", "your api id"))
-    API_HASH = os.environ.get("API_HASH", "your api hash")
-    BOT_TOKEN = os.environ.get("BOT_TOKEN", "your bot token")
-    DATABASE_URI = os.environ.get("DATABASE_URI", "your MONGODB_LINK")
+    API_ID = int(os.environ.get("API_ID", "28390522"))
+    API_HASH = os.environ.get("API_HASH", "bb6e4438855b6c9ac8d9f0d999a664c4")
+    BOT_TOKEN = os.environ.get("BOT_TOKEN", "8627582266:AAHgTO-eh87dDxy5wIHCcB9TaN9asm8FBwI")
+    DATABASE_URI = os.environ.get("DATABASE_URI", "mongodb+srv://hishammon:hishammon@cluster0.2g7bqyf.mongodb.net/?appName=Cluster0")
     DATABASE_NAME = os.environ.get("DATABASE_NAME", "Cluster0")
-    START_PIC = os.environ.get("START_PIC", "your telegraph pic")
-    ADMINS = [int(admin) for admin in os.environ.get("ADMINS", "your id").split()]
+    START_PIC = os.environ.get("START_PIC", "https://i.ibb.co/j9M7dDGR/x.jpg")
+    ADMINS = [int(admin) for admin in os.environ.get("ADMINS", "7042953166").split()]
