@@ -14,8 +14,17 @@ async def start(bot, message):
         ]
     ]
     
-    await message.reply_photo(
-        photo=Config.START_PIC,
-        caption=f"**Hello {message.from_user.mention},**\n\nI am an Advanced Auto Filter Bot. You can search movies here or in your groups!",
-        reply_markup=InlineKeyboardMarkup(buttons)
-    )
+    try:
+        # പുതിയ ഗ്രാഫ് ലിങ്ക് വെച്ച് ഫോട്ടോ അയക്കാൻ ശ്രമിക്കുന്നു
+        await message.reply_photo(
+            photo=Config.START_PIC,
+            caption=f"**Hello {message.from_user.mention},**\n\nI am an Advanced Auto Filter Bot. You can search movies here or in your groups!",
+            reply_markup=InlineKeyboardMarkup(buttons)
+        )
+    except Exception as e:
+        # എന്തെങ്കിലും കാരണത്താൽ ഫോട്ടോ വന്നില്ലെങ്കിൽ എറർ ലോഗ് ചെയ്യും, പകരം ടെക്സ്റ്റ് അയക്കും
+        print(f"Error while sending photo: {e}")
+        await message.reply_text(
+            text=f"**Hello {message.from_user.mention},**\n\nI am an Advanced Auto Filter Bot. You can search movies here or in your groups!",
+            reply_markup=InlineKeyboardMarkup(buttons)
+        )
