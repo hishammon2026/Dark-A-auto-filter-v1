@@ -26,12 +26,17 @@ class Bot(Client):
             api_id=Config.API_ID,     # നേരിട്ട് Config-ൽ നിന്ന് എടുക്കുന്നു
             api_hash=Config.API_HASH, # നേരിട്ട് Config-ൽ നിന്ന് എടുക്കുന്നു
             bot_token=Config.BOT_TOKEN, # നേരിട്ട് Config-ൽ നിന്ന് എടുക്കുന്നു
-            plugins={"root": "plugins"}
+            plugins=dict(root="plugins") # പ്ലഗിൻസ് ലോഡ് ചെയ്യാൻ ഈ രീതിയാണ് കൂടുതൽ സ്റ്റേബിൾ
         )
 
     async def start(self):
         await super().start()
         await start_web_server()
+        # ബോട്ട് സ്റ്റാർട്ട് ആയാൽ അഡ്മിന് മെസ്സേജ് അയക്കുന്നു
+        try:
+            await self.send_message(Config.ADMINS[0], "🚀 **ചിത്രശാല ബോട്ട് റെഡിയായിട്ടുണ്ട്!**")
+        except Exception as e:
+            print(f"Admin message error: {e}")
         print("🚀 Chithrashala Bot is Online!")
 
     async def stop(self, *args):
