@@ -1,9 +1,8 @@
 from pyrogram import Client, filters
 from database.database import db
 
-# 'filters.chat_active' എന്നതിന് പകരം 'filters.chat' ഉപയോഗിക്കുന്നു
-# ഇത് ഗ്രൂപ്പുകളിലും ചാനലുകളിലും ഒരുപോലെ വർക്ക് ചെയ്യും
-@Client.on_message(filters.chat & (filters.document | filters.video))
+# 'filters.chat' എന്നതിന് ശേഷം () ചേർത്താൽ മാത്രമേ Pyrogram അത് ശരിയായി എടുക്കൂ
+@Client.on_message(filters.chat() & (filters.document | filters.video))
 async def auto_save(bot, message):
     chat_id = message.chat.id
     try:
@@ -12,6 +11,7 @@ async def auto_save(bot, message):
         
         # അഡ്മിൻ അല്ലെങ്കിൽ ക്രിയേറ്റർ ആണെങ്കിൽ മാത്രം ഫയൽ സേവ് ചെയ്യും
         if member.status in ["administrator", "creator"]:
+            # ഫയൽ ഡോക്യുമെന്റ് ആണോ വീഡിയോ ആണോ എന്ന് നോക്കുന്നു
             file = message.document or message.video
             
             # ഫയൽ വിവരങ്ങൾ നിന്റെ ഡാറ്റാബേസിലേക്ക് (MongoDB) അയക്കുന്നു
